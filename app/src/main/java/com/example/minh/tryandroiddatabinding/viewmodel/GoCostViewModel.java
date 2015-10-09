@@ -2,6 +2,9 @@ package com.example.minh.tryandroiddatabinding.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 
 import com.example.minh.tryandroiddatabinding.BR;
 import com.example.minh.tryandroiddatabinding.model.GoCost;
@@ -46,4 +49,55 @@ public class GoCostViewModel extends BaseObservable {
         }
         notifyPropertyChanged(BR.cost);
     }
+
+    public TextWatcher getDistanceWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    int tmp = Integer.parseInt(s.toString());
+                    model.setDistance(tmp);
+                    notifyPropertyChanged(BR.cost);
+                } catch (NumberFormatException e){
+                    return;
+                }
+            }
+        };
+    }
+
+    public TextWatcher getUnitWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    int tmp = Integer.parseInt(s.toString());
+                    model.setUnit(tmp);
+                    notifyPropertyChanged(BR.cost);
+                } catch (NumberFormatException e){
+                    return;
+                }
+            }
+        };
+    }
+
 }
